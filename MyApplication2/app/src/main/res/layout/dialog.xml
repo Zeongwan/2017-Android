@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/dialog">
+<Button
+    android:id="@+id/shoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="拍摄"
+    android:layout_marginLeft="15dp"
+    android:textSize="18sp"
+    android:textAlignment="textStart"
+    android:background="#ffffff"/>
+    <Button
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="从相册选择"
+        android:textSize="18sp"
+        android:layout_marginLeft="15dp"
+        android:background="#FFFFFF"/>
+</LinearLayout>
