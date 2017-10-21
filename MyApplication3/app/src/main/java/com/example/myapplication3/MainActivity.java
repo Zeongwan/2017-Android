@@ -1,14 +1,21 @@
 package com.example.myapplication3;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         // 读取文本
         BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.data)));
         String line = "";
@@ -45,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         // 该循环结束于i的下一个字符是￥，然后出去以后再+1，最后i的位置就是￥
                         while (line.charAt(i + 1) != '¥')
                             i++;
-                        name.add(line.substring(j, i).replace(" ", ""));
+                        name.add(line.substring(j, i).replace(" ", "").toLowerCase());
                     } else if (count == 1) {
                         // 该循环结束于i是空格，并且i的下一个也是空格
                         while (line.charAt(i) != ' ' || line.charAt(i + 1) != ' ')
@@ -78,16 +85,138 @@ public class MainActivity extends AppCompatActivity {
         final String[] priceArray = price.toArray(new String[price.size()]);
         final String[] typeArray = type.toArray(new String[type.size()]);
         final String[] infoArray = info.toArray(new String[info.size()]);
+        final int[] picIdArray = {R.drawable.enchatedforest, R.drawable.arla, R.drawable.devondale, R.drawable.kindle,
+        R.drawable.waitrose, R.drawable.mcvitie, R.drawable.ferrero, R.drawable.maltesers, R.drawable.lindt, R.drawable.borggreve};
         final List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < nameArray.length; i++) {
             Map<String, Object> listItem = new LinkedHashMap<>();
-            listItem.put("FirstLetter", nameArray[i].charAt(0));
+            listItem.put("firstLetter", nameArray[i].charAt(0));
             listItem.put("name", nameArray[i]);
             list.add(listItem);
         }
-        final SimpleAdapter simpleadapter = new SimpleAdapter(this, list, R.layout.item, new String[] {"FirstLetter", "name"}, new int[] {R.id.goodLetter, R.id.goodName});
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        setContentView(R.layout.activity_main);
+
+        final RecyclerView mRecyclerView;
+        final CommonAdapter myAdapter;
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new CommonAdapter<Map<String, Object>>(this, R.layout.item ,list) {
+            @Override
+            public void convert(MyViewholder myViewholder, Map<String, Object> s) {
+                TextView firstLetter = myViewholder.getView(R.id.firstLetter);
+                firstLetter.setText(s.get("firstLetter").toString());
+                TextView name = myViewholder.getView(R.id.name);
+                name.setText(s.get("name").toString());
+            }
+        };
+        myAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", nameArray[position]);
+                bundle.putString("price", priceArray[position]);
+                bundle.putString("type", typeArray[position]);
+                bundle.putString("info", infoArray[position]);
+                bundle.putInt("picId", picIdArray[position]);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(int position) {
+                Toast.makeText(MainActivity.this,"移除第" + position + "个商品",Toast.LENGTH_SHORT).show();
+                myAdapter.removeItem(position);
+            }
+        });
+        mRecyclerView.setAdapter(myAdapter);
+
+        final List<Map<String, Object>> listViewList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Map<String, Object> listItem = new LinkedHashMap<>();
+            if (i == 0) {
+                listItem.put("firstLetter", "*");
+                listItem.put("name", "购物车");
+                listItem.put("price", "价格");
+            } else {
+                listItem.put("firstLetter", nameArray[i].charAt(0));
+                listItem.put("name", nameArray[i]);
+                listItem.put("price", priceArray[i]);
+                listItem.put("type", typeArray[i]);
+                listItem.put("info", infoArray[i]);
+                listItem.put("picId", picIdArray[i]);
+            }
+            listViewList.add(listItem);
+        }
+
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            String newGoodName = extras.getString("name");
+            String newGoodPrice = extras.getString("price");
+            String newGoodType = extras.getString("type");
+            String newGoodInfo = extras.getString("info");
+            int newGoodPicId =  extras.getInt("picId");
+            Map<String, Object> listItem = new LinkedHashMap<>();
+            listItem.put("firstLetter", newGoodName.charAt(0));
+            listItem.put("name", newGoodName);
+            listItem.put("price", newGoodPrice);
+            listItem.put("type", newGoodType);
+            listItem.put("info", newGoodInfo);
+            listItem.put("picId", newGoodPicId);
+            listViewList.add(listItem);
+        }
+
+        final SimpleAdapter simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
+        final ListView listView = findViewById(R.id.listView);
+        listView.setAdapter(simpleadapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", listViewList.get(i).get("name").toString());
+                bundle.putString("price", listViewList.get(i).get("price").toString());
+                bundle.putString("type", listViewList.get(i).get("type").toString());
+                bundle.putString("info", listViewList.get(i).get("info").toString());
+                bundle.putInt("picId", (int)listViewList.get(i).get("picId"));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int pos, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("从购物车删除" +  listViewList.get(pos).get("name").toString() + "?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        listViewList.remove(pos);
+                        simpleadapter.notifyDataSetChanged();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                }).show();
+                return true;
+            }
+        });
+
+        final FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        listView.setVisibility(View.INVISIBLE);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mRecyclerView.getVisibility() == View.VISIBLE) {
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    listView.setVisibility(View.VISIBLE);
+                    floatingActionButton.setImageResource(R.mipmap.mainpage);
+                } else {
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.INVISIBLE);
+                    floatingActionButton.setImageResource(R.mipmap.shoplist);
+                }
+            }
+        });
     }
 }
+
