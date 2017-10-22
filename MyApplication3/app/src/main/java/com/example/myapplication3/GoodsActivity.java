@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GoodsActivity extends AppCompatActivity {
 
@@ -30,20 +31,6 @@ public class GoodsActivity extends AppCompatActivity {
         ImageView goBack = (ImageView) findViewById(R.id.goBack);
         ImageView shop = (ImageView) findViewById(R.id.shop);
         goodPic.setImageResource(picId);
-        shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GoodsActivity.this, MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", name);
-                bundle.putString("price", price);
-                bundle.putString("type", type);
-                bundle.putString("info", info);
-                bundle.putInt("picId", picId);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, RESULT_OK);
-            }
-        });
         goBack.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,5 +60,21 @@ public class GoodsActivity extends AppCompatActivity {
         String[] operation ={"一键下单","分享商品","不感兴趣","查看更多商品促销信息"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.operate_item, operation);
         operate.setAdapter(adapter);
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GoodsActivity.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("price", price);
+                bundle.putString("type", type);
+                bundle.putString("info", info);
+                bundle.putInt("picId", picId);
+                intent.putExtras(bundle);
+                setResult(100, intent);
+                Toast.makeText(GoodsActivity.this, "商品已加到购物车", Toast.LENGTH_SHORT).show();
+//                finish();
+            }
+        });
     }
 }

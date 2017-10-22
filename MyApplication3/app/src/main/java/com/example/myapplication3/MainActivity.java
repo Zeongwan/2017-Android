@@ -25,18 +25,34 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
+
+import static com.example.myapplication3.R.raw.data;
+
 public class MainActivity extends AppCompatActivity {
+    private ArrayList<String> name = new ArrayList<String>();
+    private ArrayList<String> price = new ArrayList<String>();
+    private ArrayList<String> type = new ArrayList<String>();
+    private ArrayList<String> info = new ArrayList<String>();
+    private String[] nameArray;
+    private String[] priceArray;
+    private String[] typeArray;
+    private String[] infoArray;
+    private int[] picIdArray = {R.drawable.enchatedforest, R.drawable.arla, R.drawable.devondale, R.drawable.kindle,
+            R.drawable.waitrose, R.drawable.mcvitie, R.drawable.ferrero, R.drawable.maltesers, R.drawable.lindt, R.drawable.borggreve};
+    private List<Map<String, Object>> list = new ArrayList<>();
+    private List<Map<String, Object>> listViewList = new ArrayList<>();
+    private SimpleAdapter simpleadapter;
+    private final int REQUEST_CODE = 100;
+    private ScaleInAnimationAdapter animationAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // 读取文本
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.data)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(data)));
         String line = "";
-        final ArrayList<String> name = new ArrayList<String>();
-        final ArrayList<String> price = new ArrayList<String>();
-        final ArrayList<String> type = new ArrayList<String>();
-        final ArrayList<String> info = new ArrayList<String>();
         boolean flag = true;
         try {
             // 表示能够一直读取到信息的时候
@@ -81,13 +97,10 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        final String[] nameArray = name.toArray(new String[name.size()]);
-        final String[] priceArray = price.toArray(new String[price.size()]);
-        final String[] typeArray = type.toArray(new String[type.size()]);
-        final String[] infoArray = info.toArray(new String[info.size()]);
-        final int[] picIdArray = {R.drawable.enchatedforest, R.drawable.arla, R.drawable.devondale, R.drawable.kindle,
-        R.drawable.waitrose, R.drawable.mcvitie, R.drawable.ferrero, R.drawable.maltesers, R.drawable.lindt, R.drawable.borggreve};
-        final List<Map<String, Object>> list = new ArrayList<>();
+        nameArray = name.toArray(new String[name.size()]);
+        priceArray = price.toArray(new String[price.size()]);
+        typeArray = type.toArray(new String[type.size()]);
+        infoArray = info.toArray(new String[info.size()]);
         for (int i = 0; i < nameArray.length; i++) {
             Map<String, Object> listItem = new LinkedHashMap<>();
             listItem.put("firstLetter", nameArray[i].charAt(0));
@@ -119,53 +132,25 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putString("info", infoArray[position]);
                 bundle.putInt("picId", picIdArray[position]);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
-
             @Override
             public void onLongClick(int position) {
                 Toast.makeText(MainActivity.this,"移除第" + position + "个商品",Toast.LENGTH_SHORT).show();
                 myAdapter.removeItem(position);
             }
         });
-        mRecyclerView.setAdapter(myAdapter);
+        Map<String, Object> tempListItem = new LinkedHashMap<>();
+        animationAdapter = new ScaleInAnimationAdapter(myAdapter);
+        animationAdapter.setDuration(1000);
+        mRecyclerView.setAdapter(animationAdapter);
+        mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
+        tempListItem.put("firstLetter", "*");
+        tempListItem.put("name", "购物车");
+        tempListItem.put("price", "价格");
+        listViewList.add(0, tempListItem);
 
-        final List<Map<String, Object>> listViewList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            Map<String, Object> listItem = new LinkedHashMap<>();
-            if (i == 0) {
-                listItem.put("firstLetter", "*");
-                listItem.put("name", "购物车");
-                listItem.put("price", "价格");
-            } else {
-                listItem.put("firstLetter", nameArray[i].charAt(0));
-                listItem.put("name", nameArray[i]);
-                listItem.put("price", priceArray[i]);
-                listItem.put("type", typeArray[i]);
-                listItem.put("info", infoArray[i]);
-                listItem.put("picId", picIdArray[i]);
-            }
-            listViewList.add(listItem);
-        }
-
-        Bundle extras = this.getIntent().getExtras();
-        if (extras != null) {
-            String newGoodName = extras.getString("name");
-            String newGoodPrice = extras.getString("price");
-            String newGoodType = extras.getString("type");
-            String newGoodInfo = extras.getString("info");
-            int newGoodPicId =  extras.getInt("picId");
-            Map<String, Object> listItem = new LinkedHashMap<>();
-            listItem.put("firstLetter", newGoodName.charAt(0));
-            listItem.put("name", newGoodName);
-            listItem.put("price", newGoodPrice);
-            listItem.put("type", newGoodType);
-            listItem.put("info", newGoodInfo);
-            listItem.put("picId", newGoodPicId);
-            listViewList.add(listItem);
-        }
-
-        final SimpleAdapter simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
+        simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
         final ListView listView = findViewById(R.id.listView);
         listView.setAdapter(simpleadapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -179,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putString("info", listViewList.get(i).get("info").toString());
                 bundle.putInt("picId", (int)listViewList.get(i).get("picId"));
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -200,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
         final FloatingActionButton floatingActionButton = findViewById(R.id.fab);
         listView.setVisibility(View.INVISIBLE);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +201,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_CANCELED) return;
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                String newGoodName = extras.getString("name");
+                String newGoodPrice = extras.getString("price");
+                String newGoodType = extras.getString("type");
+                String newGoodInfo = extras.getString("info");
+                int newGoodPicId =  extras.getInt("picId");
+                Map<String, Object> listItem = new LinkedHashMap<>();
+                listItem.put("firstLetter", newGoodName.charAt(0));
+                listItem.put("name", newGoodName);
+                listItem.put("price", newGoodPrice);
+                listItem.put("type", newGoodType);
+                listItem.put("info", newGoodInfo);
+                listItem.put("picId", newGoodPicId);
+                listViewList.add(listItem);
+            }
+        }
     }
 }
 
