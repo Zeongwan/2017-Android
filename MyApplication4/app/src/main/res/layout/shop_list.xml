@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="a"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/letter"
+        android:id="@+id/shoplistFirstLetter"
+        android:textAlignment="center"
+        android:textSize="35dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="3dp"/>
+    <TextView
+        android:text="aaa"
+        android:id="@+id/shoplistName"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:layout_toRightOf="@id/shoplistFirstLetter"
+        android:layout_marginLeft="10dp"
+        />
+    <TextView
+        android:text="bbb"
+        android:id="@+id/shoplistPrice"
+        android:gravity="center|right"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:textSize="20dp"
+        android:layout_toRightOf="@id/shoplistName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        />
+</RelativeLayout>
