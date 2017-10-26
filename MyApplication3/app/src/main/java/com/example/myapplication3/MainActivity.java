@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         listViewList.add(0, tempListItem);
 
         simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
-        final ListView listView = findViewById(R.id.listView);
+        final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(simpleadapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        final FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         listView.setVisibility(View.INVISIBLE);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

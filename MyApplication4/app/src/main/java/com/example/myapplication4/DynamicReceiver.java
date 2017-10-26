@@ -9,15 +9,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 
-public class StaticReceiver extends BroadcastReceiver {
+public class DynamicReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
-        if (intent.getAction().equals("STATICTION")) {
+        if (intent.getAction().equals("DYNAMICTION")) {
             Bundle bundle = intent.getExtras();
             String name = bundle.getString("name");
             String price = bundle.getString("price");
@@ -26,13 +25,13 @@ public class StaticReceiver extends BroadcastReceiver {
             int picId = bundle.getInt("picId");
             Bitmap bm = BitmapFactory.decodeResource(context.getResources(), picId);
             Notification.Builder builder = new Notification.Builder(context);
-            builder.setContentTitle("新商品热卖")
-                    .setContentText(name + "仅售" + price)
+            builder.setContentTitle("新商马上下单品热卖")
+                    .setContentText(name + "已添加至购物车")
                     .setLargeIcon(bm)
                     .setSmallIcon(picId)
                     .setTicker("实验4")
                     .setAutoCancel(true);
-            Intent newIntent = new Intent(context, GoodsActivity.class);
+            Intent newIntent = new Intent(context, MainActivity.class);
             Bundle newBundle = new Bundle();
             newBundle.putString("name", name);
             newBundle.putString("price", price);
@@ -46,6 +45,5 @@ public class StaticReceiver extends BroadcastReceiver {
             Notification notify = builder.build();
             manager.notify(0, notify);
         }
-        //throw new UnsupportedOperationException("Not yet implemented");
     }
 }

@@ -10,17 +10,28 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class GoodsActivity extends AppCompatActivity {
+    private String name;
+    private String price;
+    private String type;
+    private String info;
+    private int picId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods);
         Bundle bundle = this.getIntent().getExtras();
-        final String name = bundle.getString("name");
-        final String price = bundle.getString("price");
-        final String type = bundle.getString("type");
-        final String info = bundle.getString("info");
-        final int picId = bundle.getInt("picId");
+        name = bundle.getString("name");
+        price = bundle.getString("price");
+        type = bundle.getString("type");
+        info = bundle.getString("info");
+        picId = bundle.getInt("picId");
         TextView goodName = (TextView) findViewById(R.id.goodName);
         TextView goodPrice = (TextView) findViewById(R.id.goodPrice);
         TextView goodType = (TextView) findViewById(R.id.goodType);
@@ -62,17 +73,23 @@ public class GoodsActivity extends AppCompatActivity {
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GoodsActivity.this, MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", name);
-                bundle.putString("price", price);
-                bundle.putString("type", type);
-                bundle.putString("info", info);
-                bundle.putInt("picId", picId);
-                intent.putExtras(bundle);
-                setResult(100, intent);
                 Toast.makeText(GoodsActivity.this, "商品已加到购物车", Toast.LENGTH_SHORT).show();
-//                finish();
+                Good good = new Good();
+                good.name = name;
+                good.price = price;
+                good.type = type;
+                good.info = info;
+                good.picId = picId;
+                EventBus.getDefault().post(good);
+                Intent intentBroadcast = new Intent("DYNAMICTION");
+                Bundle broadCastBundle = new Bundle();
+                broadCastBundle.putString("name", name);
+                broadCastBundle.putString("price", price);
+                broadCastBundle.putString("type", type);
+                broadCastBundle.putString("info", info);
+                broadCastBundle.putInt("picId", picId);
+                intentBroadcast.putExtras(broadCastBundle);
+                sendBroadcast(intentBroadcast);
             }
         });
     }

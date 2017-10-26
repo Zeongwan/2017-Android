@@ -2,6 +2,7 @@ package com.example.myapplication4;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +34,7 @@ import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import static com.example.myapplication4.R.raw.data;
 
 public class MainActivity extends AppCompatActivity {
-
+    protected DynamicReceiver dynamicReceiver;
     private ArrayList<String> name = new ArrayList<String>();
     private ArrayList<String> price = new ArrayList<String>();
     private ArrayList<String> type = new ArrayList<String>();
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private SimpleAdapter simpleadapter;
     private final int REQUEST_CODE = 100;
     private ScaleInAnimationAdapter animationAdapter;
+    private RecyclerView mRecyclerView;
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         nameArray = name.toArray(new String[name.size()]);
+
         priceArray = price.toArray(new String[price.size()]);
         typeArray = type.toArray(new String[type.size()]);
         infoArray = info.toArray(new String[info.size()]);
@@ -107,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
             listItem.put("name", nameArray[i]);
             list.add(listItem);
         }
+
+        //
+        EventBus.getDefault().register(this);
 
         //产生广播
         Random random = new Random();
@@ -120,8 +130,12 @@ public class MainActivity extends AppCompatActivity {
         broadCastBundle.putInt("picId", picIdArray[randomNum]);
         intentBroadcast.putExtras(broadCastBundle);
         sendBroadcast(intentBroadcast);
+        // 动态
+        IntentFilter dynamic_filter = new IntentFilter();
+        dynamic_filter.addAction("DYNAMICTION");
+        dynamicReceiver = new DynamicReceiver();
+        registerReceiver(dynamicReceiver, dynamic_filter);
 
-        final RecyclerView mRecyclerView;
         final CommonAdapter myAdapter;
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -134,26 +148,6 @@ public class MainActivity extends AppCompatActivity {
                 name.setText(s.get("name").toString());
             }
         };
-        myAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", nameArray[position]);
-                bundle.putString("price", priceArray[position]);
-                bundle.putString("type", typeArray[position]);
-                bundle.putString("info", infoArray[position]);
-                bundle.putInt("picId", picIdArray[position]);
-                intent.putExtras(bundle);
-                sendBroadcast(intent);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-            @Override
-            public void onLongClick(int position) {
-                Toast.makeText(MainActivity.this,"移除第" + position + "个商品",Toast.LENGTH_SHORT).show();
-                myAdapter.removeItem(position);
-            }
-        });
         Map<String, Object> tempListItem = new LinkedHashMap<>();
         animationAdapter = new ScaleInAnimationAdapter(myAdapter);
         animationAdapter.setDuration(1000);
@@ -165,22 +159,8 @@ public class MainActivity extends AppCompatActivity {
         listViewList.add(0, tempListItem);
 
         simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
-        final ListView listView = findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(simpleadapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", listViewList.get(i).get("name").toString());
-                bundle.putString("price", listViewList.get(i).get("price").toString());
-                bundle.putString("type", listViewList.get(i).get("type").toString());
-                bundle.putString("info", listViewList.get(i).get("info").toString());
-                bundle.putInt("picId", (int)listViewList.get(i).get("picId"));
-                intent.putExtras(bundle);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int pos, long l) {
@@ -199,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        final FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         listView.setVisibility(View.INVISIBLE);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,28 +195,59 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        myAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", nameArray[position]);
+                bundle.putString("price", priceArray[position]);
+                bundle.putString("type", typeArray[position]);
+                bundle.putString("info", infoArray[position]);
+                bundle.putInt("picId", picIdArray[position]);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+            @Override
+            public void onLongClick(int position) {
+                Toast.makeText(MainActivity.this,"移除第" + position + "个商品",Toast.LENGTH_SHORT).show();
+                myAdapter.removeItem(position);
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", listViewList.get(i).get("name").toString());
+                bundle.putString("price", listViewList.get(i).get("price").toString());
+                bundle.putString("type", listViewList.get(i).get("type").toString());
+                bundle.putString("info", listViewList.get(i).get("info").toString());
+                bundle.putInt("picId", (int)listViewList.get(i).get("picId"));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+    @Subscribe
+    public void onEventMainThread(Good good) {
+        Map<String, Object> listItem = new LinkedHashMap<>();
+        listItem.put("firstLetter", good.name.charAt(0));
+        listItem.put("name", good.name);
+        listItem.put("price", good.price);
+        listItem.put("type", good.type);
+        listItem.put("info", good.info);
+        listItem.put("picId", good.picId);
+        listViewList.add(listItem);
+        simpleadapter.notifyDataSetChanged();
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        listView.setVisibility(View.VISIBLE);
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == RESULT_CANCELED) return;
-            Bundle extras = data.getExtras();
-            if (extras != null) {
-                String newGoodName = extras.getString("name");
-                String newGoodPrice = extras.getString("price");
-                String newGoodType = extras.getString("type");
-                String newGoodInfo = extras.getString("info");
-                int newGoodPicId =  extras.getInt("picId");
-                Map<String, Object> listItem = new LinkedHashMap<>();
-                listItem.put("firstLetter", newGoodName.charAt(0));
-                listItem.put("name", newGoodName);
-                listItem.put("price", newGoodPrice);
-                listItem.put("type", newGoodType);
-                listItem.put("info", newGoodInfo);
-                listItem.put("picId", newGoodPicId);
-                listViewList.add(listItem);
-            }
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dynamicReceiver != null)
+            unregisterReceiver(dynamicReceiver);
+        EventBus.getDefault().unregister(this);
     }
 }
