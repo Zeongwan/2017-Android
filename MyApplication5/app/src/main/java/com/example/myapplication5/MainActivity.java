@@ -1,4 +1,4 @@
-package com.example.myapplication4;
+package com.example.myapplication5;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,7 +31,7 @@ import java.util.Random;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 
-import static com.example.myapplication4.R.raw.data;
+import static com.example.myapplication5.R.raw.data;
 
 public class MainActivity extends AppCompatActivity {
     protected DynamicReceiver dynamicReceiver;
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
         int randomNum = random.nextInt(11);
         Intent intentBroadcast = new Intent("STATICTION");
-        Bundle broadCastBundle = new Bundle();
+        final Bundle broadCastBundle = new Bundle();
         broadCastBundle.putString("name", nameArray[randomNum]);
         broadCastBundle.putString("price", priceArray[randomNum]);
         broadCastBundle.putString("type", typeArray[randomNum]);
@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(int position) {
                 Intent intent = new Intent(MainActivity.this, GoodsActivity.class);
+                intent.setAction("STATICTION");
                 Bundle bundle = new Bundle();
                 bundle.putString("name", nameArray[position]);
                 bundle.putString("price", priceArray[position]);

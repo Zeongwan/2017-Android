@@ -17,7 +17,6 @@ public class DynamicReceiver extends BroadcastReceiver {
         // an Intent broadcast.
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_demo);
         Bundle bundle = intent.getExtras();
-        Intent i = new Intent();
 
         if (intent.getAction().equals(DYNAMICATION)) {
             Toast.makeText(context, "hello world", Toast.LENGTH_SHORT).show();
