@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private SimpleAdapter simpleadapter;
     private final int REQUEST_CODE = 100;
     private ScaleInAnimationAdapter animationAdapter;
-    private RecyclerView mRecyclerView;
-    private ListView listView;
+    static private RecyclerView mRecyclerView;
+    static private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         //产生广播
         Random random = new Random();
-        int randomNum = random.nextInt(11);
+        int randomNum = random.nextInt(10);
         Intent intentBroadcast = new Intent("STATICTION");
         final Bundle broadCastBundle = new Bundle();
         broadCastBundle.putString("name", nameArray[randomNum]);
@@ -178,7 +178,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        listView.setVisibility(View.INVISIBLE);
+        Bundle getBundle = this.getIntent().getExtras();
+        if (getBundle != null && getBundle.getInt("isCart") == 1) {
+            listView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.INVISIBLE);
+        } else {
+            listView.setVisibility(View.INVISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
+//        listView.setVisibility(View.INVISIBLE);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

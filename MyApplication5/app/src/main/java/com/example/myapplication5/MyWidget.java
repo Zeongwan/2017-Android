@@ -10,12 +10,18 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+
 /**
  * Implementation of App Widget functionality.
  */
 public class MyWidget extends AppWidgetProvider {
     static final String STATICTION = "STATICTION";
-    static final String DYNAMICTION = "DYNAMICTION";
+    private String name;
+    private String price;
+    private String type;
+    private String info;
+    private int picId;
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -33,12 +39,19 @@ public class MyWidget extends AppWidgetProvider {
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
-            super.onUpdate(context, appWidgetManager, appWidgetIds);
-            Intent clickInt = new Intent(STATICTION);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickInt, 0);
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.my_widget);
-            remoteViews.setOnClickPendingIntent(R.id.widgetPic, pendingIntent);
-            appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
+//            super.onUpdate(context, appWidgetManager, appWidgetIds);
+//            Intent clickInt = new Intent(context, GoodsActivity.class);
+//            Bundle broadCastBundle = new Bundle();
+//            broadCastBundle.putString("name", name);
+//            broadCastBundle.putString("price", price);
+//            broadCastBundle.putString("type", type);
+//            broadCastBundle.putString("info", info);
+//            broadCastBundle.putInt("picId", picId);
+//            clickInt.putExtras(broadCastBundle);
+//            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickInt, FLAG_UPDATE_CURRENT);
+//            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.my_widget);
+//            remoteViews.setOnClickPendingIntent(R.id.widgetPic, pendingIntent);
+//            appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
         }
     }
 
@@ -60,10 +73,14 @@ public class MyWidget extends AppWidgetProvider {
         if (intent.getAction().equals(STATICTION)) {
             remoteViews.setTextViewText(R.id.widgetText, bundle.getString("name"));
             remoteViews.setImageViewResource(R.id.widgetPic, bundle.getInt("picId"));
+            // 要以当前的类Widget.class作为基准
+            ComponentName componentName = new ComponentName(context, MyWidget.class);
+            Intent clickInt = new Intent(context, GoodsActivity.class);
+            clickInt.putExtras(bundle);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickInt, FLAG_UPDATE_CURRENT);
+            remoteViews.setOnClickPendingIntent(R.id.widgetPic, pendingIntent);
+            AppWidgetManager.getInstance(context).updateAppWidget(componentName, remoteViews);
         }
-        // 要以当前的类Widget.class作为基准
-        ComponentName componentName = new ComponentName(context, MyWidget.class);
-        AppWidgetManager.getInstance(context).updateAppWidget(componentName, remoteViews);
     }
 }
 
