@@ -9,6 +9,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:id="@+id/widgetPic"
+        android:layout_marginRight="8dp"
         />
     <TextView
         android:layout_width="wrap_content"

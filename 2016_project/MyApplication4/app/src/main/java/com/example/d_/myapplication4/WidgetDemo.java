@@ -56,8 +56,6 @@ public class WidgetDemo extends AppWidgetProvider {
         super.onReceive(context, intent);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_demo);
         Bundle bundle = intent.getExtras();
-        Intent i = new Intent(STATICTION);
-
         if (intent.getAction().equals(STATICTION)) {
             Toast.makeText(context, "hello world", Toast.LENGTH_SHORT).show();
             remoteViews.setTextViewText(R.id.appwidget_text, bundle.getString("name"));
@@ -65,7 +63,6 @@ public class WidgetDemo extends AppWidgetProvider {
             // 要以当前的类Widget.class作为基准
             ComponentName componentName = new ComponentName(context, WidgetDemo.class);
             AppWidgetManager.getInstance(context).updateAppWidget(componentName, remoteViews);
-            // AppWidgetManager.getInstance(context).updateAppWidget(new ComponentName(context, AppWidgetManager.getInstance(context).getClass()), remoteViews);
         }
     }
 }

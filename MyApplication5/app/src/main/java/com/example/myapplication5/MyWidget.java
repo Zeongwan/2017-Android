@@ -17,11 +17,6 @@ import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
  */
 public class MyWidget extends AppWidgetProvider {
     static final String STATICTION = "STATICTION";
-    private String name;
-    private String price;
-    private String type;
-    private String info;
-    private int picId;
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -39,19 +34,6 @@ public class MyWidget extends AppWidgetProvider {
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
-//            super.onUpdate(context, appWidgetManager, appWidgetIds);
-//            Intent clickInt = new Intent(context, GoodsActivity.class);
-//            Bundle broadCastBundle = new Bundle();
-//            broadCastBundle.putString("name", name);
-//            broadCastBundle.putString("price", price);
-//            broadCastBundle.putString("type", type);
-//            broadCastBundle.putString("info", info);
-//            broadCastBundle.putInt("picId", picId);
-//            clickInt.putExtras(broadCastBundle);
-//            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickInt, FLAG_UPDATE_CURRENT);
-//            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.my_widget);
-//            remoteViews.setOnClickPendingIntent(R.id.widgetPic, pendingIntent);
-//            appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
         }
     }
 
@@ -71,7 +53,7 @@ public class MyWidget extends AppWidgetProvider {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.my_widget);
         Bundle bundle = intent.getExtras();
         if (intent.getAction().equals(STATICTION)) {
-            remoteViews.setTextViewText(R.id.widgetText, bundle.getString("name"));
+            remoteViews.setTextViewText(R.id.widgetText, bundle.getString("name") + "仅售" + bundle.getString("price" ));
             remoteViews.setImageViewResource(R.id.widgetPic, bundle.getInt("picId"));
             // 要以当前的类Widget.class作为基准
             ComponentName componentName = new ComponentName(context, MyWidget.class);

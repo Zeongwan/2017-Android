@@ -2,13 +2,20 @@ package com.example.d_.myapplication6;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
+import android.os.Parcel;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public static MediaPlayer mp = new MediaPlayer();
     private SimpleDateFormat currentTime = new SimpleDateFormat("mm:ss");
+    private ServiceConnection serviceConnection;
+    IBinder myBinder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +70,23 @@ public class MainActivity extends AppCompatActivity {
         startTime.setText(currentTime.format(time));
         endTime.setText(currentTime.format(mp.getDuration()));
         seekBar.setMax(mp.getDuration());
+
+
+        serviceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                myBinder = iBinder;
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        };
+        Intent intent = new Intent(this, MusicService.class);
+        startService(intent);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message message) {
@@ -103,6 +129,14 @@ public class MainActivity extends AppCompatActivity {
                     if (thread.isAlive() == false) {
                         thread.start();
                     }
+                }
+                try {
+                    int code = 101;
+                    Parcel data = Parcel.obtain();
+                    Parcel reply = Parcel.obtain();
+                    myBinder.transact(code, data, reply, 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
