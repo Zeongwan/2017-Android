@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE };
+    // 申请动态权限
     public static void verifyStoragePermissions(Activity activity) {
         int permission = ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -46,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
     public static MediaPlayer mp = new MediaPlayer();
     private SimpleDateFormat currentTime = new SimpleDateFormat("mm:ss");
     private ServiceConnection serviceConnection;
-    IBinder myBinder;
+    MusicService.MyBinder myBinder;
+    private MusicService musicService;
+    private int code;
+    private Parcel data = Parcel.obtain();
+    private Parcel reply = Parcel.obtain();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
         verifyStoragePermissions(this);
+        // 读取音乐文件
         try {
             mp.setDataSource(Environment.getExternalStorageDirectory() + "/melt.mp3");
             mp.prepare();
@@ -71,11 +77,12 @@ public class MainActivity extends AppCompatActivity {
         endTime.setText(currentTime.format(mp.getDuration()));
         seekBar.setMax(mp.getDuration());
 
-
+        // 绑定service
         serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                myBinder = iBinder;
+                myBinder = (MusicService.MyBinder) iBinder;
+                musicService = myBinder.getService();
             }
 
             @Override
@@ -87,53 +94,49 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
+        // 在主进程里面申请新的线程，可以更改UI
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message message) {
                 super.handleMessage(message);
-                seekBar.setProgress(mp.getCurrentPosition());
-                startTime.setText(currentTime.format(time));
+                try {
+                    code = 104;
+                    myBinder.transact(code, data, reply, 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                seekBar.setProgress(musicService.getPlayProgess());
+                //startTime.setText(currentTime.format(time));
             }
         };
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    try {
-                        if (!mp.isPlaying()) {
-                            handler.sendMessage(handler.obtainMessage(-1));
-                        } else {
-                            Thread.sleep(1000);
-                            time.setTime(time.getTime() + 1000);
-                            handler.sendMessage(handler.obtainMessage());
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        if (!mp.isPlaying()) {
+//                            handler.sendMessage(handler.obtainMessage(-1));
+//                        } else {
+//                            Thread.sleep(1000);
+//                            time.setTime(time.getTime() + 1000);
+//                            handler.sendMessage(handler.obtainMessage());
+//                        }
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+                    handler.sendMessage(handler.obtainMessage());
                 }
             }
         };
         final Thread thread = new Thread(runnable);
-
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mp.isPlaying()) {
-                    mp.pause();
-                    playButton.setText("Play");
-                    status.setText("Pause");
-                } else {
-                    mp.start();
-                    playButton.setText("Pause");
-                    status.setText("Play");
-                    if (thread.isAlive() == false) {
-                        thread.start();
-                    }
+                if (thread.isAlive() == false) {
+                    thread.start();
                 }
                 try {
-                    int code = 101;
-                    Parcel data = Parcel.obtain();
-                    Parcel reply = Parcel.obtain();
+                    code = 101;
                     myBinder.transact(code, data, reply, 0);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -143,23 +146,20 @@ public class MainActivity extends AppCompatActivity {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mp != null) {
-                    mp.stop();
-                    try {
-                        mp.prepare();
-                        mp.seekTo(0);
-                        time.setTime(0);
-                        seekBar.setProgress(0);
-                        status.setText("Stop");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    code = 102;
+                    myBinder.transact(code, data, reply, 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 退出的时候取消绑定服务
+                unbindService(serviceConnection);
+                serviceConnection = null;
                 System.exit(0);
             }
         });
@@ -176,8 +176,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mp.seekTo(seekBar.getProgress());
-                time.setTime(seekBar.getProgress());
+                try {
+                    code = 105;
+                    Parcel newData = Parcel.obtain();
+                    newData.writeInt(seekBar.getProgress());
+                    myBinder.transact(code, newData, reply, 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
