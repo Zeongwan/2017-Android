@@ -1,6 +1,8 @@
 package com.example.d_.myapplication6;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,7 +21,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_EXTERNAL_STORAGE);
         }
     }
-    public static MediaPlayer mp = new MediaPlayer();
     private SimpleDateFormat currentTime = new SimpleDateFormat("mm:ss");
     private ServiceConnection serviceConnection;
     MusicService.MyBinder myBinder;
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private int code;
     private Parcel data = Parcel.obtain();
     private Parcel reply = Parcel.obtain();
+    boolean isPlaying = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,19 +68,13 @@ public class MainActivity extends AppCompatActivity {
         final TextView status = (TextView) findViewById(R.id.status);
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
+        final ImageView imageView = (ImageView) findViewById(R.id.image);
+        final ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView, "rotation", 0, 360);
+        objectAnimator.setDuration(20000);
+        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        objectAnimator.setRepeatMode(ObjectAnimator.RESTART);
+        objectAnimator.setInterpolator(new AccelerateInterpolator());
         verifyStoragePermissions(this);
-        // 读取音乐文件
-        try {
-            mp.setDataSource(Environment.getExternalStorageDirectory() + "/melt.mp3");
-            mp.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        final Time time = new Time(0);
-        startTime.setText(currentTime.format(time));
-        endTime.setText(currentTime.format(mp.getDuration()));
-        seekBar.setMax(mp.getDuration());
 
         // 绑定service
         serviceConnection = new ServiceConnection() {
@@ -91,13 +90,25 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         Intent intent = new Intent(this, MusicService.class);
-        startService(intent);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+        startService(intent);
+
+        final Time time = new Time(0);
+        startTime.setText(currentTime.format(time));
+        try {
+            myBinder.transact(100, data, reply, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //为什么这里musicservice是空，要用一次transact么？
+//        endTime.setText(currentTime.format(musicService.getTotalProgress()));
+//        seekBar.setMax(musicService.getTotalProgress());
 
         // 在主进程里面申请新的线程，可以更改UI
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message message) {
+                // 每秒向服务发送请求
                 super.handleMessage(message);
                 try {
                     code = 104;
@@ -105,26 +116,25 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                seekBar.setProgress(musicService.getPlayProgess());
-                //startTime.setText(currentTime.format(time));
+                // 新线程设置UI
+                endTime.setText(currentTime.format(musicService.getTotalProgress()));
+                seekBar.setMax(musicService.getTotalProgress());
+                seekBar.setProgress(musicService.getPlayProgress());
+                time.setTime(musicService.getPlayProgress());
+                startTime.setText(currentTime.format(time));
             }
         };
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 while (true) {
-//                    try {
-//                        if (!mp.isPlaying()) {
-//                            handler.sendMessage(handler.obtainMessage(-1));
-//                        } else {
-//                            Thread.sleep(1000);
-//                            time.setTime(time.getTime() + 1000);
-//                            handler.sendMessage(handler.obtainMessage());
-//                        }
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-                    handler.sendMessage(handler.obtainMessage());
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (serviceConnection != null)
+                    handler.obtainMessage(110).sendToTarget();
                 }
             }
         };
@@ -134,6 +144,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (thread.isAlive() == false) {
                     thread.start();
+                    objectAnimator.start();
+                }
+                // 音乐是否在播放
+                if (isPlaying == false) {
+                    if (objectAnimator.isRunning())
+                        objectAnimator.resume();
+                    else
+                        objectAnimator.start();
+                    status.setText("Playing");
+                    playButton.setText("Pause");
+                    isPlaying = true;
+                } else {
+                    objectAnimator.pause();
+                    status.setText("Pause");
+                    playButton.setText("Play");
+                    isPlaying = false;
                 }
                 try {
                     code = 101;
@@ -143,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +179,10 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                objectAnimator.end();
+                status.setText("Stop");
+                playButton.setText("Play");
+                isPlaying = false;
             }
         });
         quitButton.setOnClickListener(new View.OnClickListener() {

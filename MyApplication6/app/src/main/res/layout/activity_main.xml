@@ -23,7 +23,7 @@
         android:layout_marginLeft="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image"
-        android:text="Stopped"
+        android:text="Stop"
         android:layout_marginStart="25dp" />
     <TextView
         android:id="@+id/startTime"

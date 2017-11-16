@@ -22,7 +22,6 @@ import static com.example.d_.myapplication6.R.id.seekBar;
 public class MusicService extends Service {
     public static MediaPlayer mp = new MediaPlayer();
     private final IBinder myBinder = new MyBinder();
-    final Time time = new Time(0);
     public MusicService() {
         try {
             mp.setDataSource(Environment.getExternalStorageDirectory() + "/melt.mp3");
@@ -30,22 +29,6 @@ public class MusicService extends Service {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        final Handler handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message message) {
-//                //startTime.setText(currentTime.format(time));
-//            }
-//        };
-//        final Runnable runnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                while (true) {
-//                    handler.sendMessage(handler.obtainMessage());
-//                }
-//            }
-//        };
-//        final Thread thread = new Thread(runnable);
-//        final Time time = new Time(0);
     }
 
     @Override
@@ -60,16 +43,18 @@ public class MusicService extends Service {
     }
     @Override
     public void onDestroy() {
+        this.stopSelf();
         super.onDestroy();
     }
     public class MyBinder extends Binder {
         MusicService getService() {
-
             return MusicService.this;
         }
         @Override
         protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
             switch (code) {
+                case 100:
+                    break;
                 case 101:
                     // 播放按钮
                     if (mp.isPlaying()) {
@@ -90,21 +75,23 @@ public class MusicService extends Service {
                     break;
                 case 103:
                     // 退出
+                    System.exit(0);
                     break;
                 case 104:
                     // 刷新界面，刷新时间
-                    time.setTime(time.getTime() + 1000);
                     break;
                 case 105:
                     // 拖动进度条
                     mp.seekTo(data.readInt());
-                    time.setTime(data.readInt() * 1000);
                     break;
             }
             return super.onTransact(code, data, reply, flags);
         }
     }
-    public int getPlayProgess() {
+    public int getPlayProgress() {
         return mp.getCurrentPosition();
+    }
+    public int getTotalProgress() {
+        return mp.getDuration();
     }
 }
