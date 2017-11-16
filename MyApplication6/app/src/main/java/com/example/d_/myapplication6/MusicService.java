@@ -53,8 +53,6 @@ public class MusicService extends Service {
         @Override
         protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
             switch (code) {
-                case 100:
-                    break;
                 case 101:
                     // 播放按钮
                     if (mp.isPlaying()) {

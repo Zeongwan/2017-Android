@@ -22,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -73,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
         objectAnimator.setDuration(20000);
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setRepeatMode(ObjectAnimator.RESTART);
-        objectAnimator.setInterpolator(new AccelerateInterpolator());
+        // 动画设置匀速
+        LinearInterpolator linearInterpolator = new LinearInterpolator();
+        objectAnimator.setInterpolator(linearInterpolator);
         verifyStoragePermissions(this);
 
         // 绑定service
@@ -95,14 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
         final Time time = new Time(0);
         startTime.setText(currentTime.format(time));
-        try {
-            myBinder.transact(100, data, reply, 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //为什么这里musicservice是空，要用一次transact么？
-//        endTime.setText(currentTime.format(musicService.getTotalProgress()));
-//        seekBar.setMax(musicService.getTotalProgress());
+        //为什么这里musicService是空，要用一次transact么？
+        endTime.setText(currentTime.format(musicService.getTotalProgress()));
+        seekBar.setMax(musicService.getTotalProgress());
 
         // 在主进程里面申请新的线程，可以更改UI
         final Handler handler = new Handler() {
