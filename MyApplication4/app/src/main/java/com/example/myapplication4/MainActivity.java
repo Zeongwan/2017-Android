@@ -52,10 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private ScaleInAnimationAdapter animationAdapter;
     private RecyclerView mRecyclerView;
     private ListView listView;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private void dealData() {
         // 读取文本
         BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(data)));
         String line = "";
@@ -114,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
             listItem.put("name", nameArray[i]);
             list.add(listItem);
         }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        dealData();
 
         //产生广播
         Random random = new Random();
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         broadCastBundle.putInt("picId", picIdArray[randomNum]);
         intentBroadcast.putExtras(broadCastBundle);
         sendBroadcast(intentBroadcast);
+
         // 动态
         EventBus.getDefault().register(this);
         IntentFilter dynamic_filter = new IntentFilter();
@@ -156,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         tempListItem.put("price", "价格");
         listViewList.add(0, tempListItem);
 
+        // 购物车列表
         simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(simpleadapter);
@@ -177,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //浮动按钮
         final FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         listView.setVisibility(View.INVISIBLE);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

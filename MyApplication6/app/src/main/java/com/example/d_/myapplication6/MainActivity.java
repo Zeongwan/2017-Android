@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private int code;
     private Parcel data = Parcel.obtain();
     private Parcel reply = Parcel.obtain();
+    // 标记是否在播放音乐
     boolean isPlaying = false;
 
     @Override
@@ -99,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         final Time time = new Time(0);
         startTime.setText(currentTime.format(time));
         //为什么这里musicService是空，要用一次transact么？
-        endTime.setText(currentTime.format(musicService.getTotalProgress()));
-        seekBar.setMax(musicService.getTotalProgress());
+//        endTime.setText(currentTime.format(musicService.getTotalProgress()));
+//        seekBar.setMax(musicService.getTotalProgress());
 
         // 在主进程里面申请新的线程，可以更改UI
         final Handler handler = new Handler() {

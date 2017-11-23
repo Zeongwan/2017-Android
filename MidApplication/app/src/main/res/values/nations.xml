@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nations">
+        <item>吴</item>
+        <item>魏</item>
+        <item>蜀</item>
+        <item>无国界</item>
+    </string-array>
+</resources>
