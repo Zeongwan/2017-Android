@@ -1,8 +1,12 @@
 package com.example.midapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -31,14 +35,51 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, DetailedPage.class));
-        List<Map<String, Object>> listView = new ArrayList<>();
+        final List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Map<String, Object> temp = new LinkedHashMap<>();
             temp.put("itemLetter", (name[i].charAt(0)));
             temp.put("itemName", name[i]);
-            listView.add(temp);
+            list.add(temp);
         }
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, listView, R.layout.item, new String[] {"firstLetter", "name"}, new int[] {R.id.itemLetter, R.id.itemName});
+        final SimpleAdapter simpleAdapter = new SimpleAdapter(this, list, R.layout.item, new String[] {"itemLetter", "itemName"}, new int[] {R.id.itemLetter, R.id.itemName});
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(simpleAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, DetailedPage.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name[i]);
+                bundle.putInt("pic", picId[i]);
+                bundle.putString("bdDate", bdDate[i]);
+                bundle.putString("home", home[i]);
+                bundle.putString("sex", sex[i]);
+                bundle.putString("nation", nations[i]);
+                bundle.putString("intro", intro[i]);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("从购物车删除" +  name[i] + "?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        list.remove(i);
+                        simpleAdapter.notifyDataSetChanged();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                }).show();
+                return true;
+            }
+        });
+        name.
     }
 }
