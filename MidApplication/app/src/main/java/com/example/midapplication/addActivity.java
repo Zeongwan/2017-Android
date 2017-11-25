@@ -9,13 +9,13 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -24,31 +24,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class DetailedPage extends AppCompatActivity {
-    private TextView name;
-    private ImageView pic;
-    private TextView bdDate;
-    private Spinner nation;
-    private TextView home;
-    private TextView intro;
-    private TextView sex;
-    private EditText editText;
-    private Integer elementPos;
+public class addActivity extends AppCompatActivity {
+    private ImageView addPic;
+    private EditText addName;
+    private EditText addHome;
+    private EditText addIntro;
+    private EditText addBddate;
+    private RadioButton addMale;
+    private RadioButton addFemale;
+    private RadioButton addSexElse;
+    private RadioButton addShu;
+    private RadioButton addWu;
+    private RadioButton addWei;
+    private RadioButton addDonghan;
+    private RadioButton addNationElse;
+    private RadioGroup sexGroup;
+    private RadioGroup nationGroup;
+    private Button makeAdd;
+    private Button cancelAdd;
+    private int NOADD = 2;
+    private int MAKEADD = 3;
+    String sex = "男", nation = "蜀";
     private AlertDialog.Builder dialog;
-    final private int STARTLIST = 1;
     final static int CAMERA =1;
     final static int ICON =2;
     final static int CAMERAPRESS =3;
@@ -60,89 +69,120 @@ public class DetailedPage extends AppCompatActivity {
     String imagePath;
     Bitmap bitmapdown;
     private void findId() {
-        name = (TextView) findViewById(R.id.name);
-        pic = (ImageView) findViewById(R.id.pic);
-        bdDate = (TextView) findViewById(R.id.bdDate);
-        nation = (Spinner) findViewById(R.id.nation);
-        home = (TextView) findViewById(R.id.home);
-        intro = (TextView) findViewById(R.id.intro);
-        sex = (TextView) findViewById(R.id.sex);
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_page);
-        findId();
-        imagePath = "";
-        Bundle bundle = this.getIntent().getExtras();
-        elementPos = bundle.getInt("pos");
-        name.setText(bundle.getString("name"));
-        if (bundle.getInt("pic") == -1) {
-            imagePath = bundle.getString("picPath");
-            imageFile = new File(imagePath);
-            Bitmap bitmap = ThumbnailUtils.extractThumbnail(getBitmapFromFile(imageFile), 200, 200);
-            bitmapdown = bitmap;
-            pic.setImageBitmap(bitmapdown);
-        } else {
-            pic.setImageResource(bundle.getInt("pic"));
-        }
-        bdDate.setText(bundle.getString("bdDate"));
-        String nationString = bundle.getString("nation");
-        if (nationString.equals("蜀")) {
-            nation.setSelection(2, true);
-        } else if (nationString.equals("吴")) {
-            nation.setSelection(0, true);
-        } else if (nationString.equals("魏")) {
-            nation.setSelection(1, true);
-        } else if (nationString.equals("东汉")) {
-            nation.setSelection(3, true);
-        } else {
-            nation.setSelection(4, true);
-        }
-        home.setText(bundle.getString("home"));
-        intro.setText(bundle.getString("intro"));
-        name.setOnClickListener(new View.OnClickListener() {
+        addPic = findViewById(R.id.addPic);
+        addName = findViewById(R.id.nameInput);
+        addHome = findViewById(R.id.homeInput);
+        addIntro = findViewById(R.id.introInput);
+        addBddate = findViewById(R.id.bdDateInput);
+        addMale = findViewById(R.id.male);
+        addFemale = findViewById(R.id.female);
+        addSexElse = findViewById(R.id.sexElse);
+        addShu = findViewById(R.id.shu);
+        addWu = findViewById(R.id.wu);
+        addWei = findViewById(R.id.wei);
+        addDonghan = findViewById(R.id.donghan);
+        addNationElse = findViewById(R.id.elseNation);
+        sexGroup = findViewById(R.id.radioSex);
+        nationGroup = findViewById(R.id.radioNations);
+        makeAdd = findViewById(R.id.makeAdd);
+        cancelAdd = findViewById(R.id.cancelAdd);
+
+        //性别选择
+        sexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                setNewData(name);
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (addMale.isChecked())
+                    sex = "男";
+                else if (addFemale.isChecked())
+                    sex = "女";
+                else
+                    sex = "其他";
+                setNewResult();
             }
         });
-        bdDate.setOnClickListener(new View.OnClickListener() {
+        //国家选择
+        nationGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                setNewData(bdDate);
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (addShu.isChecked())
+                    nation = "蜀";
+                else if (addWu.isChecked())
+                    nation = "吴";
+                else if (addWei.isChecked())
+                    nation = "魏";
+                else if (addDonghan.isChecked())
+                    nation = "东汉";
+                else
+                    nation = "其他";
+                setNewResult();
             }
         });
-        home.setOnClickListener(new View.OnClickListener() {
+        //确认按钮
+        makeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setNewData(home);
+                if (addName.getText().toString().equals("")) {
+                    Toast.makeText(addActivity.this, "名字为空！", Toast.LENGTH_SHORT).show();
+                } else if (addBddate.getText().toString().equals("")) {
+                    Toast.makeText(addActivity.this, "生卒为空！", Toast.LENGTH_SHORT).show();
+                } else if (addHome.getText().toString().equals("")) {
+                    Toast.makeText(addActivity.this, "籍贯为空！", Toast.LENGTH_SHORT).show();
+                } else if (addBddate.getText().toString().equals("")) {
+                    Toast.makeText(addActivity.this, "简介为空！", Toast.LENGTH_SHORT).show();
+                } else {
+                    setNewResult();
+                    addActivity.this.finish();
+                }
             }
         });
-        intro.setOnClickListener(new View.OnClickListener() {
+        //取消按钮
+        cancelAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setNewData(intro);
+                setResult(NOADD, new Intent());
+                addActivity.this.finish();
             }
         });
-        pic.setOnClickListener(new View.OnClickListener() {
+        //选择添加的头像框
+        addPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder picDialog = new AlertDialog.Builder(DetailedPage.this);
+                AlertDialog.Builder picDialog = new AlertDialog.Builder(addActivity.this);
                 final String[] items = new String[] {"拍摄", "从相机选择"};
                 picDialog.setTitle("更换头像").setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        changePic(i);
+                        selectPic(i);
                     }
                 });
                 picDialog.show();
+                setNewResult();
             }
         });
-        setNewResult();
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add);
+        setResult(NOADD, new Intent());
+        findId();
+    }
+    private void setNewResult() {
+        Intent resultIntent = new Intent();
+        Bundle resultBundle = new Bundle();
+        resultBundle.putString("name", addName.getText().toString());
+        resultBundle.putString("bdDate", addBddate.getText().toString());
+        resultBundle.putString("home", addHome.getText().toString());
+        resultBundle.putString("sex", sex);
+        resultBundle.putString("nation", nation);
+        resultBundle.putString("intro", addIntro.getText().toString());
+        resultBundle.putString("picPath", imagePath);
+        resultIntent.putExtras(resultBundle);
+        setResult(MAKEADD, resultIntent);
     }
 
-    private void changePic(int choice) {
+    // 修改图片部分
+    private void selectPic(int choice) {
         switch (choice) {
             case cameraChoice:
                 if( Build.VERSION.SDK_INT>=23){
@@ -155,7 +195,6 @@ public class DetailedPage extends AppCompatActivity {
                     }else {
                         startCamera();
                     }
-
                 }else {
                     startCamera();
                 }
@@ -171,55 +210,14 @@ public class DetailedPage extends AppCompatActivity {
                     }else {
                         startIcon();
                     }
-
                 }else {
                     startIcon();
                 }
                 break;
         }
     }
-
-    private void setNewResult() {
-        // 设置Activity结果
-        Intent resultIntent = new Intent();
-        Bundle resultBundle = new Bundle();
-        resultBundle.putInt("pos", elementPos);
-        resultBundle.putString("name", name.getText().toString());
-        resultBundle.putString("home", home.getText().toString());
-        resultBundle.putString("sex", sex.getText().toString());
-        resultBundle.putString("nation", nation.getSelectedItem().toString());
-        resultBundle.putString("picPath", imagePath);
-        resultBundle.putString("intro", intro.getText().toString());
-        if (!imagePath.equals("")) {
-            resultBundle.putInt("picId", -1);
-        }
-        resultIntent.putExtras(resultBundle);
-        setResult(STARTLIST, resultIntent);
-    }
-
-    private void setNewData(final TextView textView) {
-        editText = new EditText(this);
-        dialog = new AlertDialog.Builder(this);
-        dialog.setView(editText);
-        dialog.setPositiveButton("确定修改", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                textView.setText(editText.getText());
-                setNewResult();
-            }
-        });
-
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        dialog.show();
-    }
-
-
     public static String getPath(final Context context, final Uri uri) {
-
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
@@ -238,7 +236,6 @@ public class DetailedPage extends AppCompatActivity {
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-
                 return getDataColumn(context, contentUri, null, null);
             }
             // MediaProvider
@@ -246,7 +243,6 @@ public class DetailedPage extends AppCompatActivity {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
-
                 Uri contentUri = null;
                 if ("image".equals(type)) {
                     contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
@@ -255,12 +251,10 @@ public class DetailedPage extends AppCompatActivity {
                 } else if ("audio".equals(type)) {
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 }
-
                 final String selection = "_id=?";
                 final String[] selectionArgs = new String[]{
                         split[1]
                 };
-
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         }
@@ -333,7 +327,6 @@ public class DetailedPage extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(imagePath,options);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -345,7 +338,7 @@ public class DetailedPage extends AppCompatActivity {
                     bitmap1 = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                     imagePath = getPath(this, imageUri);
                     bitmapdown = bitmap1;
-                    pic.setImageBitmap(decodeSampledBitmapFromFilePath(imagePath, 200, 200));
+                    addPic.setImageBitmap(decodeSampledBitmapFromFilePath(imagePath, 200, 200));
                 } catch (FileNotFoundException e) {
                     imageFile = null;
                     e.printStackTrace();
@@ -361,13 +354,12 @@ public class DetailedPage extends AppCompatActivity {
                 imagePath = dst;
                 Bitmap bitmap = ThumbnailUtils.extractThumbnail(getBitmapFromFile(imageFile), 200, 200);
                 bitmapdown = bitmap;
-                pic.setImageBitmap(bitmapdown);
+                addPic.setImageBitmap(bitmapdown);
                 Log.d("chenzhu","imagePath"+imagePath);
                 break;
         }
         setNewResult();
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -389,11 +381,8 @@ public class DetailedPage extends AppCompatActivity {
                     Toast.makeText(this,"对不起你没有同意该权限", Toast.LENGTH_LONG).show();
                 }
                 break;
-
         }
     }
-
-
     public Bitmap getBitmapFromFile(File dst) {
         if (null != dst && dst.exists()) {
             BitmapFactory.Options opts = new BitmapFactory.Options();
@@ -408,7 +397,6 @@ public class DetailedPage extends AppCompatActivity {
         }
         return null;
     }
-
     public static String getDataColumn(Context context, Uri uri, String selection,
                                        String[] selectionArgs) {
         Cursor cursor = null;
@@ -431,7 +419,6 @@ public class DetailedPage extends AppCompatActivity {
         }
         return null;
     }
-
     // 申请权限
     /**
      * @param uri The Uri to check.

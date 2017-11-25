@@ -5,7 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.midapplication.MainActivity">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/initPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/showList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人物"/>
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/showList"
+            android:text="添加"/>
+        <Button
+            android:id="@+id/playMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/add"
+            android:text="播放"/>
+        <Button
+            android:id="@+id/find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/playMusic"
+            android:text="查询"/>
+    </android.support.constraint.ConstraintLayout>
     <ListView
+        android:visibility="invisible"
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

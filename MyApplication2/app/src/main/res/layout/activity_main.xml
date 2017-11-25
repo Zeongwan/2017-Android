@@ -44,7 +44,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="请输入学号"
-    android:inputType="number"
+    android:inputType="date"
     android:padding="8dp"
     android:textSize="18sp"
     android:layout_marginTop="20dp"
