@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.RemoteException;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -34,7 +35,6 @@ public class MusicService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // 返回实例
-        // TODO: Return the communication channel to the service.
         return myBinder;
     }
     @Override
@@ -48,6 +48,7 @@ public class MusicService extends Service {
     }
     public class MyBinder extends Binder {
         MusicService getService() {
+            Log.d("service", "this is getService");
             return MusicService.this;
         }
         @Override

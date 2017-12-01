@@ -20,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,8 +100,14 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
 
         final Time time = new Time(0);
-        startTime.setText(currentTime.format(time));
-        //为什么这里musicService是空，要用一次transact么？
+        try {
+            Thread.currentThread().sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("1", "hello world");
+        }
+
+//        //为什么这里musicService是空，要用一次transact么？
 //        endTime.setText(currentTime.format(musicService.getTotalProgress()));
 //        seekBar.setMax(musicService.getTotalProgress());
 
@@ -133,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     if (serviceConnection != null)
-                    handler.obtainMessage(110).sendToTarget();
+                        handler.obtainMessage(110).sendToTarget();
                 }
             }
         };
