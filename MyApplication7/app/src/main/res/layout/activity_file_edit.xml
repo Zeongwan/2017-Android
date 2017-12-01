@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linnearPage"
+    tools:context="com.example.d_.myapplication7.FileEdit">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="File Editor"
+        android:textColor="#460870"
+        android:textSize="45dp" />
+
+    <EditText
+        android:id="@+id/fileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="file name"/>
+    <EditText
+        android:gravity="left"
+        android:layout_weight="1"
+        android:id="@+id/fileContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="File content here"/>
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:solidColor="#000000"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Save" />
+            <Button
+                android:id="@+id/load"
+                app:layout_constraintLeft_toRightOf="@+id/save"
+                app:layout_constraintRight_toLeftOf="@+id/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            android:text="LOAD"/>
+        <Button
+            android:layout_gravity="right"
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="CLEAR"
+            />
+        </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+    <Button android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#f70105"
+        android:text="DELETE"/>
+</LinearLayout>
