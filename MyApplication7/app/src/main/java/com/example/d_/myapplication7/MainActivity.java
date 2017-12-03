@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findId();
+        // 创建sharepreference
         SharedPreferences sharedPreferences = this.getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         psw = sharedPreferences.getString("psw", "");
@@ -73,11 +74,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             changeVisable();
         }
+        // 确认按钮
         pswSecondOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (psw.equals(pswSecondInput.getText().toString())) {
                     startActivity(new Intent(MainActivity.this, FileEdit.class));
+                } else {
+                    Toast.makeText(MainActivity.this, "密码输入错误", Toast.LENGTH_SHORT).show();
                 }
             }
         });

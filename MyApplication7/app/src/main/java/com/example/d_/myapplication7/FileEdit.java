@@ -26,6 +26,7 @@ public class FileEdit extends AppCompatActivity {
         final EditText fileNameText = (EditText) findViewById(R.id.fileName);
         final EditText fileContentText = (EditText) findViewById(R.id.fileContent);
 
+        // 保存按钮，把内容写入文件
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +41,7 @@ public class FileEdit extends AppCompatActivity {
                 }
             }
         });
+        // 加载对应文件
         load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +58,7 @@ public class FileEdit extends AppCompatActivity {
                 }
             }
         });
+        // 清除输入框
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,12 +66,16 @@ public class FileEdit extends AppCompatActivity {
                 fileContentText.setText("");
             }
         });
+        // 删除按钮，存在文件则删除
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     if (deleteFile(fileNameText.getText().toString())) {
                         Toast.makeText(FileEdit.this, "File " + fileNameText.getText().toString() + " delete!" +
+                                "!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(FileEdit.this, "File " + fileNameText.getText().toString() + " no exists!" +
                                 "!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
