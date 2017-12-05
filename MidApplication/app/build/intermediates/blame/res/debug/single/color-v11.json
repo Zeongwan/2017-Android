@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+    }
+]

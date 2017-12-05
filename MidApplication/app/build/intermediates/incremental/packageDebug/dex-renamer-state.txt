@@ -1,0 +1,7 @@
+#Fri Nov 24 19:11:34 CST 2017
+base.0=/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4816ef26ebc418e81dd00135a0d7efa5d13d6d6e
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bdeef6ef93175c874ca2716681ef8458025d72fa/classes.dex
+base.1=/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bdeef6ef93175c874ca2716681ef8458025d72fa
+file.0=/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4816ef26ebc418e81dd00135a0d7efa5d13d6d6e/classes.dex

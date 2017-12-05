@@ -22,7 +22,6 @@ public class FileEdit extends AppCompatActivity {
         final Button load = (Button) findViewById(R.id.load);
         final Button clear = (Button) findViewById(R.id.clear);
         final Button delete = (Button) findViewById(R.id.delete);
-
         final EditText fileNameText = (EditText) findViewById(R.id.fileName);
         final EditText fileContentText = (EditText) findViewById(R.id.fileContent);
 

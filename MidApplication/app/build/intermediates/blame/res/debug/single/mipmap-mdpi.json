@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher_round.png",
+        "source": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher.png",
+        "source": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    }
+]

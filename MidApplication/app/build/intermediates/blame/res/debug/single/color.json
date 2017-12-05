@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_light.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_dark.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_hint_foreground_material_dark.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/design_error.xml",
+        "source": "/Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/res/color/design_error.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/res/color/abc_secondary_text_material_light.xml"
+    }
+]

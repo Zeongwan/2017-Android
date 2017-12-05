@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f86d95fbe88625bd7c0abbd97d9586158d603743/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/2bb03fdca3d09c36182e098900690547b3098f8c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c3f39b091ccb032e58c9a646f9754cb6c71cbc69/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/c8a018be839644d81edafb10527908d6832bd641/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="b4d6fbbb48b42dd03fd9c5a09b3b7a53266df6ed">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ea64b5cf935b6db517d2d9fad53bf90fce29dac4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/aff2719a941bfb69a3cbe253249a216021661bab/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d4c90445dc5000f43d99789430dc525cd9b8fbb7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/875d4d24030cd470b7f3e5a582e85523242763b8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d78e9b645beafa721e2dfa73ebe6b3266ae97e58/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/84ddcdea623f4885f69f0c9a0c1747cd351e3983/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5e174a670453ca6e143d99e1240e672461c9ff1b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.gradle/caches/modules-2/files-2.1/org.greenrobot/eventbus/3.0.0/ddd99896e9569eaababbe81b35d80e1b91c4ad85/eventbus-3.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="ddd99896e9569eaababbe81b35d80e1b91c4ad85">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/eventbus-3.0.0_406a9923f9ec8e698e58a64cc655cd5317c7f4ac/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/dd6c6276f9bbc91a1b27fac1be0ee7b9e7d9609a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e2f04bf67e0bbaca2a507a6f09cfb8aa43bf0ca4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4816ef26ebc418e81dd00135a0d7efa5d13d6d6e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/d4032898c0e8f50c749c3acfafecb11c65458ba8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_bc7d2f68630d107bcb13db9d8f64a63192dd9ed4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_576bb3f587c5b909c81137195d3ccc09609a72d5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/865d170c49e4a16bd459574bbaad814b6ce27895/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_97b2e8aa08745c3d06eec28d6569dfc24edd9df6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/db05aea567d8674f3ce1a91040f67e6883799793/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_08ae7d75fee2c63fe37756102d6e3857e5db3534/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="15f55a9492fdbb49684982d0213c4c1f1a343af3">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bdeef6ef93175c874ca2716681ef8458025d72fa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7054bad6ea66b5ff61464f5a3084cbeea26cb179/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/b21303d2c355ce08da4153ce949754885137678f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f997109fa4ab6d63487caadf70d9e6a74420e3a0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.1.0/814258103cf26a15fcc26ecce35f5b7d24b73f8/support-annotations-26.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.1.0_5e8376d848a617d301a212b10cc49e437e78ea88/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_3eb0e90c564015ec8ce241166671eae5668da36b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_55905bbfad1643db2620acc9b107d02ca9ca2432/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/adde23ce19fa5f391de00abac43a129fc97c48e6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_bf39299ba69af736a1bf626daddc2a922aef0ad4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/6ab06173863f85bccc48a5345210954d926eab82/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a38dc57bd3a0900f291f38e4786cde461aece5a9">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_33d310ee0f1d0cc898701983f33c0bacc66e4173/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f54bac9c736ea45b012a1012ab597674b6b2db56/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/luckystar/.android/build-cache/ea8c6e1088506ca60657a9cbd818db9f1b972f33/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="27.0.1"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ee8c63bc40457c0adf86dc481e862d17bb2fee49/classes.dex" />
+    </item>
+
+</items>

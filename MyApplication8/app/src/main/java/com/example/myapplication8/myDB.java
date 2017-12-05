@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class myDB extends SQLiteOpenHelper {
-    private static final String DB_NAME = "app8DB";
     private static final String TABLE_NAME = "app8Table";
     private static final int DB_VERSION = 1;
     public myDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -17,7 +16,7 @@ public class myDB extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_TABLE = "CREATE TABLE if not exists " + TABLE_NAME + " (_id INTEGER PRIMARY KEY, name TEXT, birth TEXT, gift TEXT, phone TEXT)";
+        String CREATE_TABLE = "CREATE TABLE if not exists " + TABLE_NAME + " (_id INTEGER PRIMARY KEY, name TEXT, birthday TEXT, gift TEXT, phone TEXT)";
         sqLiteDatabase.execSQL(CREATE_TABLE);
     }
     @Override

@@ -1,0 +1,4 @@
+#Fri Nov 24 18:34:40 CST 2017
+base.0=/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9
+renamed.0=classes.dex
+file.0=/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex

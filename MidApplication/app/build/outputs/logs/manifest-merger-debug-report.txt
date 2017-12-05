@@ -1,0 +1,112 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:2:1-22:12
+	package
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:3:5-41
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+application
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:5:5-20:19
+MERGED from [com.android.support:design:26.1.0] /Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/luckystar/.android/build-cache/ea8c6e1088506ca60657a9cbd818db9f1b972f33/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/luckystar/.android/build-cache/84ddcdea623f4885f69f0c9a0c1747cd351e3983/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/luckystar/.android/build-cache/db05aea567d8674f3ce1a91040f67e6883799793/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/luckystar/.android/build-cache/b21303d2c355ce08da4153ce949754885137678f/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/luckystar/.android/build-cache/aff2719a941bfb69a3cbe253249a216021661bab/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/luckystar/.android/build-cache/adde23ce19fa5f391de00abac43a129fc97c48e6/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:cardview-v7:26.1.0] /Users/luckystar/.android/build-cache/c8a018be839644d81edafb10527908d6832bd641/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/luckystar/.android/build-cache/2bb03fdca3d09c36182e098900690547b3098f8c/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/luckystar/.android/build-cache/d4032898c0e8f50c749c3acfafecb11c65458ba8/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/luckystar/.android/build-cache/dd6c6276f9bbc91a1b27fac1be0ee7b9e7d9609a/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/AndroidManifest.xml:25:5-29:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/luckystar/.android/build-cache/865d170c49e4a16bd459574bbaad814b6ce27895/output/AndroidManifest.xml:24:5-28:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/luckystar/.android/build-cache/875d4d24030cd470b7f3e5a582e85523242763b8/output/AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:8:9-41
+	android:supportsRtl
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:9:9-54
+	android:allowBackup
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:6:9-35
+	android:icon
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:7:9-43
+	android:theme
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.midapplication.MainActivity
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:12:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:16:27-74
+activity#com.example.midapplication.DetailedPage
+ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:19:9-59
+	android:name
+		ADDED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml:19:19-47
+uses-sdk
+INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:design:26.1.0] /Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/luckystar/.android/build-cache/ea8c6e1088506ca60657a9cbd818db9f1b972f33/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/luckystar/.android/build-cache/84ddcdea623f4885f69f0c9a0c1747cd351e3983/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/luckystar/.android/build-cache/db05aea567d8674f3ce1a91040f67e6883799793/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] /Users/luckystar/.android/build-cache/b21303d2c355ce08da4153ce949754885137678f/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/luckystar/.android/build-cache/aff2719a941bfb69a3cbe253249a216021661bab/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/luckystar/.android/build-cache/adde23ce19fa5f391de00abac43a129fc97c48e6/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:cardview-v7:26.1.0] /Users/luckystar/.android/build-cache/c8a018be839644d81edafb10527908d6832bd641/output/AndroidManifest.xml:20:5-44
+MERGED from [jp.wasabeef:recyclerview-animators:2.2.7] /Users/luckystar/.android/build-cache/6ab06173863f85bccc48a5345210954d926eab82/output/AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/luckystar/.android/build-cache/2bb03fdca3d09c36182e098900690547b3098f8c/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/luckystar/.android/build-cache/d4032898c0e8f50c749c3acfafecb11c65458ba8/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/luckystar/.android/build-cache/dd6c6276f9bbc91a1b27fac1be0ee7b9e7d9609a/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.1.0] /Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/AndroidManifest.xml:21:5-23:58
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/luckystar/.android/build-cache/865d170c49e4a16bd459574bbaad814b6ce27895/output/AndroidManifest.xml:20:5-22:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/luckystar/.android/build-cache/875d4d24030cd470b7f3e5a582e85523242763b8/output/AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.1.0] /Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.1.0] /Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/luckystar/.android/build-cache/664896a8e311045d29ace7400377c830868dad63/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/luckystar/.android/build-cache/ea8c6e1088506ca60657a9cbd818db9f1b972f33/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/luckystar/.android/build-cache/84ddcdea623f4885f69f0c9a0c1747cd351e3983/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/luckystar/.android/build-cache/db05aea567d8674f3ce1a91040f67e6883799793/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/luckystar/.android/build-cache/b21303d2c355ce08da4153ce949754885137678f/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/luckystar/.android/build-cache/aff2719a941bfb69a3cbe253249a216021661bab/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/luckystar/.android/build-cache/adde23ce19fa5f391de00abac43a129fc97c48e6/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:cardview-v7:26.1.0] /Users/luckystar/.android/build-cache/c8a018be839644d81edafb10527908d6832bd641/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/luckystar/.android/build-cache/2bb03fdca3d09c36182e098900690547b3098f8c/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/luckystar/.android/build-cache/d4032898c0e8f50c749c3acfafecb11c65458ba8/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/luckystar/.android/build-cache/dd6c6276f9bbc91a1b27fac1be0ee7b9e7d9609a/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:design:26.1.0] /Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:design:26.1.0] /Users/luckystar/.android/build-cache/c74c43bd7c7afd191afec177b3ea2e413cf4394c/output/AndroidManifest.xml:27:13-51
+meta-data#android.arch.lifecycle.VERSION
+ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/luckystar/.android/build-cache/865d170c49e4a16bd459574bbaad814b6ce27895/output/AndroidManifest.xml:25:9-27:47
+	android:value
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/luckystar/.android/build-cache/865d170c49e4a16bd459574bbaad814b6ce27895/output/AndroidManifest.xml:27:13-44
+	android:name
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/luckystar/.android/build-cache/865d170c49e4a16bd459574bbaad814b6ce27895/output/AndroidManifest.xml:26:13-58

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/luckystar/Desktop/Android/2017-Android/MidApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/luckystar/.android/build-cache/4626ded3fa0aa57e3652250670914eb929955312/output/res/layout-v21/notification_action.xml"
+    }
+]
