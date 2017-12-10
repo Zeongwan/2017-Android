@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:text="姓名" />
         <TextView
+            android:layout_marginLeft="3dp"
             android:id="@+id/dialogName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,6 +56,7 @@
             android:id="@+id/dialogGift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -72,6 +74,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="12345678910"/>
+            android:layout_marginLeft="3dp"/>
     </LinearLayout>
 </LinearLayout>

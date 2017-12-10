@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(MainActivity.this, AddActivity.class), 0);
             }
         });
+        // 加载数据库中存在的行
         Cursor cursor = sqLiteDatabase.query(TABLENAME, new String[]{"_id", "name", "birthday", "gift", "phone"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -77,8 +78,10 @@ public class MainActivity extends AppCompatActivity {
                 dialogName.setText(map.get("name").toString());
                 dialogBirthday.setText(map.get("birthday").toString());
                 dialogGift.setText(map.get("gift").toString());
-                dialogPhone.setText(map.get("phone").toString());
+                if (map.get("phone") != null)
+                    dialogPhone.setText(map.get("phone").toString());
                 final int pos = i;
+                // 弹出对话框
                 builder.setView(dialog).setPositiveButton("保存修改", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -120,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bundle bundle = data.getExtras();
         switch (resultCode) {
             case (MAKEADD) :
+                Bundle bundle = data.getExtras();
                 String name = bundle.getString("name");
                 String birthday = bundle.getString("birthday");
                 String gift = bundle.getString("gift");
@@ -132,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 contentValues.put("name", name);
                 contentValues.put("birthday", birthday);
                 contentValues.put("gift", gift);
+                contentValues.put("phone", phone);
                 if (sqLiteDatabase.insert(TABLENAME, null, contentValues) == -1) {
                     Toast.makeText(MainActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
                 } else {

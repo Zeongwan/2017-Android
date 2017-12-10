@@ -26,9 +26,10 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        phone = "";
         final EditText nameInput = (EditText) findViewById(R.id.nameInput);
         final EditText birthDay = (EditText) findViewById(R.id.birthdayInput);
-        final EditText gift = (EditText) findViewById(R.id.birthdayInput);
+        final EditText gift = (EditText) findViewById(R.id.giftInput);
         final Button addButton = (Button) findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +39,7 @@ public class AddActivity extends AppCompatActivity {
                 } else {
                     Cursor cursorContact = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
                     while (cursorContact.moveToNext()) {
-                        if (nameInput.getText().toString().equals(cursorContact.getString(cursorContact.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))));
+                        if (nameInput.getText().toString().equals(cursorContact.getString(cursorContact.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME.toString()))))
                             phone = cursorContact.getString(cursorContact.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     }
                     SQLiteDatabase sqLiteDatabase = myDatabase.getReadableDatabase();
@@ -50,6 +51,7 @@ public class AddActivity extends AppCompatActivity {
                             break;
                         }
                     }
+                    // 如果存在相同用户名
                     if (hasRepeat) {
                         Toast.makeText(AddActivity.this, "名字重复了！", Toast.LENGTH_SHORT).show();
                     } else {
@@ -64,6 +66,7 @@ public class AddActivity extends AppCompatActivity {
                         finish();
                     }
                     sqLiteDatabase.close();
+                    setResult(0, new Intent(AddActivity.this, MainActivity.class));
                 }
             }
         });
