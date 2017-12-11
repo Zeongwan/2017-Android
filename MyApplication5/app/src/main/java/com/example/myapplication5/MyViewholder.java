@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static com.example.myapplication5.R.styleable.RecyclerView;
+
 /**
  * Created by 丁丁 on 2017/10/21 0021.
  */
