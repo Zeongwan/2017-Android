@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Map<String, Object>> list = new ArrayList<>();
     private List<Map<String, Object>> listViewList = new ArrayList<>();
     private SimpleAdapter simpleadapter;
-    private final int REQUEST_CODE = 100;
     private ScaleInAnimationAdapter animationAdapter;
     private RecyclerView mRecyclerView;
     private ListView listView;

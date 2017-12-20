@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             list.add(listItem);
         }
 
+        // 商品信息列表
         final RecyclerView mRecyclerView;
         final CommonAdapter myAdapter;
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -150,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         tempListItem.put("price", "价格");
         listViewList.add(0, tempListItem);
 
+        // 购物车列表
         simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(simpleadapter);
