@@ -5,12 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.myapplication9.MainActivity">
+    <ProgressBar
+        android:id="@+id/newActivity"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
+        />
     <EditText
         android:id="@+id/nameInput"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/clearButton"
         android:layout_width="wrap_content"
@@ -27,4 +37,22 @@
         app:layout_constraintTop_toBottomOf="@+id/nameInput"
         app:layout_constraintLeft_toRightOf="@+id/clearButton"
         app:layout_constraintRight_toRightOf="parent"/>
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/progressBar"
+        android:visibility="invisible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clearButton"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clearButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        ></android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

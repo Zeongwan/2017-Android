@@ -1,5 +1,7 @@
 package com.example.myapplication9;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -12,4 +14,6 @@ import rx.Observable;
 public interface githubInterface {
     @GET("/users/{user}")
     Observable<User> getUser(@Path("user") String user);
+    @GET("{repos}")
+    Observable<List<Repos>> getRepos(@Path("repos") String repos);
 }

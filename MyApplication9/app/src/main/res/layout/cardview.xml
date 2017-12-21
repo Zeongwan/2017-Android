@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:contentPadding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Name:"
+            android:id="@+id/cardName"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/cardId"
+            android:text="id:"
+            app:layout_constraintTop_toBottomOf="@+id/cardName"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/cardBlog"
+            android:text="blog:"
+            app:layout_constraintTop_toBottomOf="@+id/cardId"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

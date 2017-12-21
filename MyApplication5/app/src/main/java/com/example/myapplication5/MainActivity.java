@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         dynamicReceiver = new DynamicReceiver();
         registerReceiver(dynamicReceiver, dynamic_filter);
 
+        // 设置Adapter部分
         final CommonAdapter myAdapter;
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -146,16 +147,19 @@ public class MainActivity extends AppCompatActivity {
                 name.setText(s.get("name").toString());
             }
         };
+        // 设置第一个item
         Map<String, Object> tempListItem = new LinkedHashMap<>();
-        animationAdapter = new ScaleInAnimationAdapter(myAdapter);
-        animationAdapter.setDuration(1000);
-        mRecyclerView.setAdapter(animationAdapter);
-        mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
         tempListItem.put("firstLetter", "*");
         tempListItem.put("name", "购物车");
         tempListItem.put("price", "价格");
         listViewList.add(0, tempListItem);
+        // 设置动画
+        animationAdapter = new ScaleInAnimationAdapter(myAdapter);
+        animationAdapter.setDuration(1000);
+        mRecyclerView.setAdapter(animationAdapter);
+        mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
 
+        // 设置购物车
         simpleadapter = new SimpleAdapter(this, listViewList, R.layout.shop_list, new String[] {"firstLetter", "name", "price"}, new int[] {R.id.shoplistFirstLetter, R.id.shoplistName, R.id.shoplistPrice});
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(simpleadapter);
@@ -186,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
             listView.setVisibility(View.INVISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
-//        listView.setVisibility(View.INVISIBLE);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
