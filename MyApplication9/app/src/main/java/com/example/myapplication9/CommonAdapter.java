@@ -63,6 +63,11 @@ public abstract class CommonAdapter<M> extends RecyclerView.Adapter<MyViewholder
         mdatas.remove(position);
         notifyItemRemoved(position);
     }
+    // 移走所有元素
+    public void removeAll() {
+        mdatas.removeAll(mdatas);
+        notifyDataSetChanged();
+    }
     public M getItem(int position) {
         return mdatas.get(position);
     }

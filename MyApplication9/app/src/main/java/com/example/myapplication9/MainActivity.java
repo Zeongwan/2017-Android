@@ -1,6 +1,8 @@
 package com.example.myapplication9;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<User> list = new ArrayList<>();
     private ProgressBar progressBar;
-    private ProgressBar newActivityProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         fetchButton = (Button) findViewById(R.id.fetchButton);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        newActivityProgressBar = (ProgressBar) findViewById(R.id.newActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         // 设置布局
         final CommonAdapter commonAdapter = new CommonAdapter<User>(this, R.layout.cardview, list) {
@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onError(Throwable e) {
                                 Toast.makeText(MainActivity.this, "确认是否有该用户存在", Toast.LENGTH_SHORT).show();
                                 Log.d("error", "出现错误");
+                                progressBar.setVisibility(View.INVISIBLE);
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -97,39 +99,24 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ReposActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
-//                final Retrofit retrofit = createRetrofit(clickUser.getUrl() + "/");
-//                githubInterface githubinterface = retrofit.create(githubInterface.class);
-//                githubinterface.getRepos("repos")
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new Subscriber<List<Repos>>() {
-//                            @Override
-//                            public void onCompleted() {
-//                                nameInput.setVisibility(View.INVISIBLE);
-//                                clearButton.setVisibility(View.INVISIBLE);
-//                                fetchButton.setVisibility(View.INVISIBLE);
-//                                recyclerView.setVisibility(View.INVISIBLE);
-//                                newActivityProgressBar.setVisibility(View.VISIBLE);
-//                            }
-//
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                Log.d("repos", "找不到仓库");
-//                                e.printStackTrace();
-//                            }
-//
-//                            @Override
-//                            public void onNext(List<Repos> reposes) {
-//                                List<Repos> reposList = reposes;
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("baseUrl", baseUrl);
-//                            }
-//                        });
             }
-
             @Override
             public void onLongClick(int position) {
-                commonAdapter.removeItem(position);
+                final int removePos = position;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("确定删除吗？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        commonAdapter.removeItem(removePos);
+                    }
+                }).setNegativeButton("取消", null).show();
+            }
+        });
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nameInput.setText("");
+                commonAdapter.removeAll();
             }
         });
     }
